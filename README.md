@@ -122,5 +122,7 @@ The library is licensed under [zlib license](LICENSE.txt)
 
 ## Links
 Uses [stb_truetype](http://nothings.org) for font rendering.
+
 Uses [Jukka Jylänki's Skyline bin packer](https://github.com/juj/RectangleBinPack) for atlas building.
+
 Uses [Bjoern Hoehrmann's dfa](http://bjoern.hoehrmann.de/utf-8/decoder/dfa/) for UTF-8 decoding.
