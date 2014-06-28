@@ -41,9 +41,11 @@ enum FONSalign {
 enum FONSerrorCode {
 	// Font atlas is full.
 	FONS_ATLAS_FULL = 1,
-	// Scratch memory used to render glyphs is full, requested size reported in 'val', you may need to bump up FONS_SCRATCH_BUF_SIZE.		
+	// Scratch memory used to render glyphs is full, requested size
+	// reported in 'val', you may need to bump up FONS_SCRATCH_BUF_SIZE.
 	FONS_SCRATCH_FULL = 2,
-	// Calls to fonsPushState has craeted too large stack, if you need deep state stack bump up FONS_MAX_STATES.
+	// Calls to fonsPushState has craeted too large stack, if you need
+	// deep state stack bump up FONS_MAX_STATES.
 	FONS_STATES_OVERFLOW = 3,
 	// Trying to pop too many states fonsPopState().
 	FONS_STATES_UNDERFLOW = 4,
@@ -85,7 +87,7 @@ void fonsDeleteInternal(struct FONScontext* s);
 void fonsSetErrorCallback(struct FONScontext* s, void (*callback)(void* uptr, int error, int val), void* uptr);
 // Returns current atlas size.
 void fonsGetAtlasSize(struct FONScontext* s, int* width, int* height);
-// Expands the atlas size. 
+// Expands the atlas size.
 int fonsExpandAtlas(struct FONScontext* s, int width, int height);
 // Reseta the whole stash.
 int fonsResetAtlas(struct FONScontext* stash, int width, int height);
@@ -429,7 +431,27 @@ static void fons__tmpfree(void* ptr, void* up)
 	// empty
 }
 
+/********************************************************************************/
 // Copyright (c) 2008-2010 Bjoern Hoehrmann <bjoern@hoehrmann.de>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+//
 // See http://bjoern.hoehrmann.de/utf-8/decoder/dfa/ for details.
 
 #define FONS_UTF8_ACCEPT 0
@@ -467,8 +489,10 @@ static unsigned int fons__decutf8(unsigned int* state, unsigned int* codep, unsi
 	*state = utf8d[256 + *state + type];
 	return *state;
 }
+/********************************************************************************/
 
-// Atlas based on Skyline Bin Packer by Jukka Jylänki
+// Atlas based on Public Domain Skyline Bin Packer by Jukka Jylänki
+// https://github.com/juj/RectangleBinPack
 
 static void fons__deleteAtlas(struct FONSatlas* atlas)
 {

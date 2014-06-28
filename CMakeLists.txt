@@ -76,9 +76,9 @@ find_package(OpenGL)
 find_package(Threads)
 
 # We need GLFW3 for this example - just build one we know will work
-add_subdirectory(glfw)
+add_subdirectory(example/glfw)
 set(GLFW3_LIBRARIES glfw)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/glfw/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/example/glfw/include)
 
 include(CheckLibraryExists)
 CHECK_LIBRARY_EXISTS(m cos "" HAVE_M_LIB)
@@ -88,7 +88,7 @@ endif(HAVE_M_LIB)
 
 #---------------------------------------------------------------------
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(fontstash example/example.c)
 target_link_libraries(fontstash ${GLFW3_LIBRARIES} ${OPENGL_LIBRARIES} ${M_LIBRARY} ${CMAKE_THREAD_LIBS_INIT})

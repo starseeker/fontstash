@@ -65,14 +65,18 @@ int main()
 	int fontJapanese = FONS_INVALID;
 	GLFWwindow* window;
 	const GLFWvidmode* mode;
-	
+	int mwidth;
+	int mheight;
+
 	struct FONScontext* fs = NULL;
 
 	if (!glfwInit())
 		return -1;
 
 	mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-    window = glfwCreateWindow(mode->width - 40, mode->height - 80, "Font Stash", NULL, NULL);
+	if (mode->width > 840) { mwidth = 840; } else { mwidth = mode->width; }
+	if (mode->height > 640) { mheight = 640; } else { mheight= mode->height; }
+	window = glfwCreateWindow(mwidth - 40, mheight - 80, "Font Stash", NULL, NULL);
 	if (!window) {
 		glfwTerminate();
 		return -1;
