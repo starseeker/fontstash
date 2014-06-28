@@ -7,7 +7,7 @@ The code is split in two parts, the font atlas and glyph quad generator [fontsta
 
 ## Screenshot
 
-![screenshot of some text rendered witht the sample program](/screenshots/screen-01.png?raw=true)
+![screenshot of some text rendered witht the sample program](/example/example.png?raw=true)
 
 ## Example
 ``` C
@@ -109,21 +109,12 @@ The size of the internal buffer is defined using `FONS_VERTEX_COUNT` define. The
 
 ## Compiling
 
-In order to compile the demo project, your will need to install [GLFW](http://www.glfw.org/) to compile.
-
-FontStash example project uses [premake4](http://industriousone.com/premake) to build platform specific projects, now is good time to install it if you don't have it already. To build the example, navigate into the root folder in your favorite terminal, then:
-
-- *OS X*: `premake4 xcode4`
-- *Windows*: `premake4 vs2010`
-- *Linux*: `premake4 gmake`
-
-See premake4 documentation for full list of supported build file types. The projects will be created in `build` folder. An example of building and running the example on OS X:
-
 ```bash
-$ premake4 gmake
+$ mkdir build
 $ cd build/
+$ cmake ..
 $ make
-$ ./example
+$ ./bin/fontstash
 ```
 
 # License
@@ -131,3 +122,5 @@ The library is licensed under [zlib license](LICENSE.txt)
 
 ## Links
 Uses [stb_truetype](http://nothings.org) for font rendering.
+Uses [Jukka Jylänki's Skyline bin packer](https://github.com/juj/RectangleBinPack) for atlas building.
+Uses [Bjoern Hoehrmann's dfa](http://bjoern.hoehrmann.de/utf-8/decoder/dfa/) for UTF-8 decoding.
