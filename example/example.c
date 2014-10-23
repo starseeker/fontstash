@@ -67,8 +67,7 @@ int main()
 	const GLFWvidmode* mode;
 	int mwidth;
 	int mheight;
-
-	struct FONScontext* fs = NULL;
+	FONScontext* fs = NULL;
 
 	if (!glfwInit())
 		return -1;
