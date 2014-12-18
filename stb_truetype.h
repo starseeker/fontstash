@@ -418,6 +418,8 @@ int main(int arg, char **argv)
    #endif
 #endif
 
+#define STB_ZERO(val)       (((val) > -1.0e-37) && ((val) < 1.0e-37))
+
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 ////
@@ -1753,7 +1755,7 @@ static void stbtt__rasterize(stbtt__bitmap *result, stbtt__point *pts, int *wcou
       for (k=0; k < wcount[i]; j=k++) {
          int a=k,b=j;
          // skip the edge if horizontal
-         if (p[j].y == p[k].y)
+         if (STB_ZERO(p[j].y - p[k].y))
             continue;
          // add edge from j to k to the list
          e[n].invert = 0;
@@ -1900,9 +1902,9 @@ unsigned char *stbtt_GetGlyphBitmapSubpixel(const stbtt_fontinfo *info, float sc
    stbtt_vertex *vertices;   
    int num_verts = stbtt_GetGlyphShape(info, glyph, &vertices);
 
-   if (scale_x == 0) scale_x = scale_y;
-   if (scale_y == 0) {
-      if (scale_x == 0) return NULL;
+   if (STB_ZERO(scale_x)) scale_x = scale_y;
+   if (STB_ZERO(scale_y)) {
+      if (STB_ZERO(scale_x)) return NULL;
       scale_y = scale_x;
    }
 
