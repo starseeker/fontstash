@@ -194,6 +194,7 @@ static GLuint shader() {
 
 static int gl3fons__renderCreate(void* userPtr, int width, int height)
 {
+	int i;
 	GLFONScontext* gl = (GLFONScontext*)userPtr;
 	// Create may be called multiple times, delete existing texture.
 	if (gl->tex != 0) {
@@ -216,7 +217,7 @@ static int gl3fons__renderCreate(void* userPtr, int width, int height)
 	gl->projMat_uniform = glGetUniformLocation(gl->shader, "projMat");
 	
 	// setup our projection matrix as an identity matrix
-	for (int i = 0; i < 16; i++) gl->projMat[i] = 0.0;
+	for (i = 0; i < 16; i++) gl->projMat[i] = 0.0;
 	gl->projMat[0] = 1.0;
 	gl->projMat[5] = 1.0;
 	gl->projMat[10] = 1.0;
@@ -290,7 +291,7 @@ static void gl3fons__renderDraw(void* userPtr, const float* verts, const float* 
 	glUniform1i(gl->texture_uniform, 0);
 	
 	// init our projection matrix
-	glUniformMatrix4fv(gl->projMat_uniform, 1, false, gl->projMat);
+	glUniformMatrix4fv(gl->projMat_uniform, 1, 0, gl->projMat);
 	
 	// bind our vao
 	glBindVertexArray(gl->vao);
@@ -388,6 +389,7 @@ void gl3fonsDelete(FONScontext* ctx)
 
 void gl3fonsProjection(FONScontext* ctx, GLfloat *mat, int screenWidth, int screenHeight)
 {
+	int i;
 	GLFONScontext* gl = (GLFONScontext*)(ctx->params.userPtr);
 
 	// If we have a screenWidth and a screenHeight, calculate mat.  Otherwise,
@@ -402,7 +404,7 @@ void gl3fonsProjection(FONScontext* ctx, GLfloat *mat, int screenWidth, int scre
 		mat[15] = 1.0f;
 	}
 
-	for (int i = 0; i < 16; i++) {
+	for (i = 0; i < 16; i++) {
 		gl->projMat[i] = mat[i];
 	}
 }
