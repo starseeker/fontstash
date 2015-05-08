@@ -128,15 +128,7 @@ Note that this requires an extension manager to be used such as [GLEW](http://gl
 GLfloat mat[16];
 
 memset(mat, 0, 16 * sizeof(GLfloat));
-mat[0] = 2.0 / screenwidth;
-mat[5] = -2.0 / screenheight;
-mat[10] = 2.0;
-mat[12] = -1.0;
-mat[13] = 1.0;
-mat[14] = -1.0;
-mat[15] = 1.0;
-
-gl3fonsProjection(mFS, mat);
+gl3fonsProjection(mFS, mat, screenWidth, screenHeight);
 
 ```
 
