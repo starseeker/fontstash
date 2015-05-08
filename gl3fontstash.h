@@ -27,7 +27,7 @@
 
 FONScontext* gl3fonsCreate(int width, int height, int flags);
 void gl3fonsDelete(FONScontext* ctx);
-void gl3fonsProjection(FONScontext* ctx, GLfloat *mat);
+void gl3fonsProjection(FONScontext* ctx, GLfloat *mat, int screenWidth, int screenHeight);
 
 unsigned int gl3fonsRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 
@@ -386,9 +386,21 @@ void gl3fonsDelete(FONScontext* ctx)
 // mat[14] = -1.0;
 // mat[15] = 1.0;
 
-void gl3fonsProjection(FONScontext* ctx, GLfloat *mat)
+void gl3fonsProjection(FONScontext* ctx, GLfloat *mat, int screenWidth, int screenHeight)
 {
 	GLFONScontext* gl = (GLFONScontext*)(ctx->params.userPtr);
+
+	// If we have a screenWidth and a screenHeight, calculate mat.  Otherwise,
+	// assume it is alredy set and being passed in.
+	if (screenWidth != 0 && screenHeight != 0) {
+		mat[0] = 2.0f / screenWidth;
+		mat[5] = -2.0f / screenHeight;
+		mat[10] = 2.0f;
+		mat[12] = -1.0f;
+		mat[13] = 1.0f;
+		mat[14] = -1.0f;
+		mat[15] = 1.0f;
+	}
 
 	for (int i = 0; i < 16; i++) {
 		gl->projMat[i] = mat[i];
