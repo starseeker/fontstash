@@ -92,9 +92,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(fontstash example/example.c)
 target_link_libraries(fontstash ${GLFW3_LIBRARIES} ${OPENGL_LIBRARIES} ${M_LIBRARY} ${CMAKE_THREAD_LIBS_INIT})
-add_definitions(-g)
-add_executable(fontstash_gl3 example/example_gl3.c)
-target_link_libraries(fontstash_gl3 ${GLFW3_LIBRARIES} ${OPENGL_LIBRARIES} ${M_LIBRARY} ${CMAKE_THREAD_LIBS_INIT})
 #install(TARGETS brlcad
 #  RUNTIME DESTINATION ${BIN_DIR}
 #  LIBRARY DESTINATION ${LIB_DIR}
